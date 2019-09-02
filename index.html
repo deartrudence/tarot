@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="./normalize.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Poller+One|&display=swap" rel="stylesheet">
+</head>
+<body>
+	<header>
+	<div class="header-card-grid">
+	</div>	
+		<div class="overlay">Tarot Cards</div>
+	</header>
+
+	<section class="main">
+		<h2>Click on the deck to select a card.</h2>
+		<div class="cards-wrapper">
+			<div class="chosen-cards">
+				<!-- <h2>Chosen Cards</h2> -->
+				<div class="chosen-card-grid">
+				</div>
+			</div>
+			<div class="card-deck">
+				<div class="deck">
+					<!-- <h2>Choose Card</h2> -->
+					<button class="user-shuffle">Shuffle Deck</button>
+					<button class="clear-cards">Clear Cards</button>
+					<div class="deck-deck">
+						<img class="choose-card" src="./Tarot_Cards/Major_Arcana/card-back.jpg" alt="">
+						<img class="secondary-card secondary-card-1" src="./Tarot_Cards/Major_Arcana/card-back.jpg" alt="">
+						<img class="secondary-card secondary-card-2" src="./Tarot_Cards/Major_Arcana/card-back.jpg" alt="">
+						<img class="secondary-card secondary-card-3" src="./Tarot_Cards/Major_Arcana/card-back.jpg" alt="">
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer>
+		<p>Thanks to <a href="http://www.quickcardreading.com/" target="_blank">Cassandra</a> for the open source tarot cards ♥</p>
+	</footer>
+
+
+	<style>
+		
+		body {
+			/*font-family: 'Beth Ellen', sans-serif;*/
+			font-family: 'Poller One', sans-serif;
+			background: #95b3cb;
+			color: #333;
+			letter-spacing: 1.2px;
+		}
+
+		h1, h2 {
+			font-weight: normal;
+		}
+
+		h2 {
+			text-align: center;
+	    padding: 30px;
+	    text-transform: uppercase;
+		}
+
+		h2, button {
+			font-family: 'Open Sans', sans-serif;
+			font-weight: bold;
+		}
+
+		header {
+	    position: relative;
+		}
+
+		.header-card-grid {
+			display: grid;
+			grid-template-columns: repeat(12, 1fr);
+			height: 400px;
+	    overflow: hidden;
+		}
+
+		header .overlay {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background: rgba(0,0,0,0.4);
+			transition: 0.3s;
+			z-index: 10;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 60px;
+			color: white;
+			text-shadow: 2px 4px 12px rgba(0, 0, 0,0.9);
+			letter-spacing: 4px;
+		}
+
+		.header-card {
+			transform: skewy(30deg) translateY(-25px);
+		}
+
+		.header-card img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+		}
+
+		section.main {
+			min-height: calc(100vh - 400px - 136px);
+		}
+
+		section.main h1 {
+			text-align: center;
+		}
+
+		img {
+			max-width: 100%;
+		}
+
+		.cards-wrapper {
+			display: flex;
+			flex-wrap: wrap;
+			padding: 0px 60px 60px 60px;
+		}
+
+		.chosen-cards {
+			/*margin: 20px 0;*/
+		}
+
+		.chosen-cards, .card-deck {
+			width: 60%;
+			text-align: center;
+		}
+
+		.card-deck {
+			width: 40%;
+		}
+
+		.card-deck button {
+			/*display: block;*/
+			margin: 0 auto;
+			padding: 10px 20px;
+		  margin: 0px auto 40px auto;
+		  border: 1px solid #060C3C;
+		  background: #060C3C;
+		  border-radius: 40px;
+		  color: white;
+		  letter-spacing: 1.2px;
+		  transition: 0.3s ease-out;
+		  box-shadow: 0 5px 12px rgba(43,43,43,.3);
+		}
+
+		.card-deck button:hover {
+		  box-shadow: 0 3px 6px rgba(43,43,43,.3);
+		  background: #FFD831;
+		  border: 1px solid #FFD831;
+		  color: #060C3C;
+		}
+
+		.card-deck .deck-deck {
+			position: relative;
+		}
+
+		.card-deck .secondary-card {
+			position: absolute;
+			top: 0;
+			left: 50%;
+			z-index: -1;
+		}
+
+		.card-deck .secondary-card-1 {
+			transform: translate(-44%, -12px);
+		}
+
+		.card-deck .secondary-card-2 {
+			transform: translate(-46%, -8px);
+		}
+
+		.card-deck .secondary-card-3 {
+			transform: translate(-48%, -4px);
+		}
+
+		.chosen-card-grid {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			grid-gap: 30px;
+		}
+
+		.chosen-card {
+			position: relative;
+			cursor: pointer;
+			box-shadow: 0 8px 16px rgba(43,43,43,.3);
+			transition: 0.3s;
+		}
+		.chosen-card img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+		}
+
+		.chosen-card .overlay {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background: rgba(255,255,255,0.2);
+			transition: 0.3s;
+			display: none;
+		}
+
+		.chosen-card:hover {
+			box-shadow: 0 4px 8px rgba(43,43,43,.4);
+		}
+
+		.deck {
+			text-align: center;
+		}
+
+		.deck img {
+			width: 50%;
+			cursor: pointer;
+			transition: 0.3s;
+		}
+
+		.deck img:hover {
+			box-shadow: 0 8px 16px rgba(43,43,43,.5);
+		}
+
+		footer {
+			font-family: sans-serif;
+			background: #060C3C;
+			color: #95b3cb;
+			padding: 40px;
+			letter-spacing: 1.2px;
+			text-align: center;
+		}
+
+		footer a {
+			color: #95b3cb;
+			transition: 0.3s;
+		}
+
+		footer a:hover {
+			color: #FFD831;
+		}
+
+		@media screen and (max-width: 770px) {
+			.cards-wrapper {
+				padding: 30px 30px;
+			}
+
+			.card-deck {
+				width: 100%;
+			}
+
+			.chosen-cards{
+				width: 100%;
+				order: 2;
+			}
+
+			.chosen-card-grid {
+		    grid-template-columns: repeat(2, 1fr);
+		    grid-gap: 30px;
+		  }
+
+		  .header-card-grid {
+	      grid-template-columns: repeat(6, 1fr);
+	    }
+
+	    header .overlay {
+	    	font-size: 42px;
+	    }
+
+	    section.main h2 {
+	    	padding: 20px 20px 0px 20px;
+	    }
+
+	    .deck {
+	    	padding-bottom: 40px;
+	    }
+		}
+
+
+	</style>
+
+	<script
+		  src="https://code.jquery.com/jquery-3.4.1.min.js"
+		  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+		  crossorigin="anonymous"></script>
+
+	<script>
+		const cards = [
+			{
+				type: "Cups",
+				name: "10 of Cups",
+				description: "something here",
+				img: "10-of-cups.jpg"
+			},
+			{
+				type: "Cups",
+				name: "2 of Cups final",
+				description: "something here",
+				img: "2-of-cups-final.jpg"
+			},
+			{
+				type: "Cups",
+				name: "3 of Cups",
+				description: "something here",
+				img: "3-of-cups-final.jpg"
+			},
+			{
+				type: "Cups",
+				name: "4 of Cups",
+				description: "something here",
+				img: "4-of-cups-final.jpg"
+			},
+			{
+				type: "Cups",
+				name: "5 of Cups",
+				description: "something here",
+				img: "5-of-cups.jpg"
+			},
+			{
+				type: "Cups",
+				name: "6 of Cups",
+				description: "something here",
+				img: "6-of-cups-final.jpg"
+			},
+			{
+				type: "Cups",
+				name: "7 of Cups",
+				description: "something here",
+				img: "7-of-cups.jpg"
+			},
+			{
+				type: "Cups",
+				name: "8 of Cups",
+				description: "something here",
+				img: "8-of-cups.jpg"
+			},
+			{
+				type: "Cups",
+				name: "9 of Cups",
+				description: "something here",
+				img: "9-of-cups.jpg"
+			},
+			{
+				type: "Cups",
+				name: "Ace of Cups",
+				description: "something here",
+				img: "ace-of-cups-final.jpg"
+			},
+			{
+				type: "Cups",
+				name: "King of Cups",
+				description: "something here",
+				img: "King-of-cups.jpg"
+			},
+			{
+				type: "Cups",
+				name: "Knight of Cups",
+				description: "something here",
+				img: "knight-of-cups.jpg"
+			},
+			{
+				type: "Cups",
+				name: "Page of Cups",
+				description: "something here",
+				img: "page-of-cups.jpg"
+			},
+			{
+				type: "Cups",
+				name: "Queen of Cups",
+				description: "something here",
+				img: "queen-of-cups-final.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "1 Magician",
+				description: "something here",
+				img: "1-magician-final.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "10 Wheel",
+				description: "something here",
+				img: "10-wheel.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "11 Justice",
+				description: "something here",
+				img: "11-Justice.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "12 Hanged Man",
+				description: "something here",
+				img: "12-hanged-man.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "13 Death",
+				description: "something here",
+				img: "13-death.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "14 Temperance",
+				description: "something here",
+				img: "14-Temperance.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "15 Devil",
+				description: "something here",
+				img: "15-devil.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "16 Tower",
+				description: "something here",
+				img: "16-tower.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "17 Star",
+				description: "something here",
+				img: "17-star.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "18 Moon",
+				description: "something here",
+				img: "18-moon.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "19 Sun",
+				description: "something here",
+				img: "19-sun.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "2 High Priestess",
+				description: "something here",
+				img: "2-high-priestess.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "20 Judgement",
+				description: "something here",
+				img: "20-Judgement.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "21 World",
+				description: "something here",
+				img: "21-world.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "3 Empress",
+				description: "something here",
+				img: "3-empress.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "4 Emperor",
+				description: "something here",
+				img: "4-Emperor.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "6 Lovers",
+				description: "something here",
+				img: "6-lovers.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "7 Chariot",
+				description: "something here",
+				img: "7-chariot.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "8 Strength",
+				description: "something here",
+				img: "8-strength.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "9 Hermit",
+				description: "something here",
+				img: "9-hermit.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "Fool 0 Final",
+				description: "something here",
+				img: "fool-0-final.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "Hanged Man Geord",
+				description: "something here",
+				img: "hanged-man-george.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "Heigh Priestess",
+				description: "something here",
+				img: "high-priestess.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "Temperance Buckley",
+				description: "something here",
+				img: "temperance-buckley.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "The Hierophant",
+				description: "something here",
+				img: "The-Hierophant.jpg"
+			},
+			{
+				type: "Major_Arcana",
+				name: "TJ Tower",
+				description: "something here",
+				img: "TJ-Tower.jpg"
+			},
+			{
+				type: "Pentacles",
+				name: "10 of Pentacles",
+				description: "something here",
+				img: "10-of-pentacles-final.jpg"
+			},
+			{
+				type: "Pentacles",
+				name: "2 of Pentacles",
+				description: "something here",
+				img: "2-of-pentacles-final.jpg"
+			},
+			{
+				type: "Pentacles",
+				name: "3 of Pentacles",
+				description: "something here",
+				img: "3-of-pentacles-final.jpg"
+			},
+			{
+				type: "Pentacles",
+				name: "4 of Pentacles",
+				description: "something here",
+				img: "4-of-pentacles-final.jpg"
+			},
+			{
+				type: "Pentacles",
+				name: "5 of Pentacles",
+				description: "something here",
+				img: "5-of-pentacles.jpg"
+			},
+			{
+				type: "Pentacles",
+				name: "6 of Pentacles",
+				description: "something here",
+				img: "6-of-pentacles-final.jpg"
+			},
+			{
+				type: "Pentacles",
+				name: "7 of Pentacles",
+				description: "something here",
+				img: "7-of-pentacles.jpg"
+			},
+			{
+				type: "Pentacles",
+				name: "8 of Pentacles",
+				description: "something here",
+				img: "8-of-pentacles-final.jpg"
+			},
+			{
+				type: "Pentacles",
+				name: "9 of Pentacles",
+				description: "something here",
+				img: "9-of-pentacles.jpg"
+			},
+			{
+				type: "Pentacles",
+				name: "Ace of Pentacles",
+				description: "something here",
+				img: "ace-of-pentacles-final.jpg"
+			},
+			{
+				type: "Pentacles",
+				name: "King of Pentacles",
+				description: "something here",
+				img: "king-of-pentacles.jpg"
+			},
+			{
+				type: "Pentacles",
+				name: "Knight of Pentacles",
+				description: "something here",
+				img: "Knight-of-Pentacles.jpg"
+			},
+			{
+				type: "Pentacles",
+				name: "Page of Pentacles",
+				description: "something here",
+				img: "page-of-pentacles.jpg"
+			},
+			{
+				type: "Pentacles",
+				name: "Queen of Pentacles",
+				description: "something here",
+				img: "queen-of-pentacles.jpg"
+			},
+			{
+				type: "Swords",
+				name: "10 of Swords Final",
+				description: "something here",
+				img: "10-of-swords-final.jpg"
+			},
+			{
+				type: "Swords",
+				name: "2 of Swords Final",
+				description: "something here",
+				img: "2-of-swords.jpg"
+			},
+			{
+				type: "Swords",
+				name: "3 of Swords Final",
+				description: "something here",
+				img: "3-of-swords-final.jpg"
+			},
+			{
+				type: "Swords",
+				name: "4 of Swords Final",
+				description: "something here",
+				img: "4-of-swords-final.jpg"
+			},
+			{
+				type: "Swords",
+				name: "5 of Swords Final",
+				description: "something here",
+				img: "5-of-swords-final.jpg"
+			},
+			{
+				type: "Swords",
+				name: "6 of Swords Final",
+				description: "something here",
+				img: "6-of-swords.jpg"
+			},
+			{
+				type: "Swords",
+				name: "7 of Swords Final",
+				description: "something here",
+				img: "7-of-swords-final.jpg"
+			},
+			{
+				type: "Swords",
+				name: "8 of Swords Final",
+				description: "something here",
+				img: "8-of-swords-final.jpg"
+			},
+			{
+				type: "Swords",
+				name: "9 of Swords Final",
+				description: "something here",
+				img: "9-of-swords-final.jpg"
+			},
+			{
+				type: "Swords",
+				name: "Ace of Swords Final",
+				description: "something here",
+				img: "Ace-of-Swords-final.jpg"
+			},
+			{
+				type: "Swords",
+				name: "King of Swords",
+				description: "something here",
+				img: "King-of-Swords.jpg"
+			},
+			{
+				type: "Swords",
+				name: "Knight of Swords",
+				description: "something here",
+				img: "knight-of-swords.jpg"
+			},
+			{
+				type: "Swords",
+				name: "Page of Swords",
+				description: "something here",
+				img: "page-of-swords.jpg"
+			},
+			{
+				type: "Swords",
+				name: "Queen of Swords Final",
+				description: "something here",
+				img: "queen-of-swords.jpg"
+			},
+			{
+				type: "Wands",
+				name: "10 of Wands Final",
+				description: "something here",
+				img: "10-of-wands-final.jpg"
+			},
+			{
+				type: "Wands",
+				name: "2 of Wands Final",
+				description: "something here",
+				img: "2-of-wands-final.jpg"
+			},
+			{
+				type: "Wands",
+				name: "3 of Wands Final",
+				description: "something here",
+				img: "3-of-wands-final-small.jpg"
+			},
+			{
+				type: "Wands",
+				name: "4 of Wands Final",
+				description: "something here",
+				img: "4-of-wands-final.jpg"
+			},
+			{
+				type: "Wands",
+				name: "5 of Wands Final",
+				description: "something here",
+				img: "5-of-wands-final.jpg"
+			},
+			{
+				type: "Wands",
+				name: "6 of Wands Final",
+				description: "something here",
+				img: "6-of-wands-final.jpg"
+			},
+			{
+				type: "Wands",
+				name: "7 of Wands Final",
+				description: "something here",
+				img: "7-of-wands-final.jpg"
+			},
+			{
+				type: "Wands",
+				name: "8 of Wands Final",
+				description: "something here",
+				img: "8-of-wands-final.jpg"
+			},
+			{
+				type: "Wands",
+				name: "9 of Wands Final",
+				description: "something here",
+				img: "9-of-wands-final.jpg"
+			},
+			{
+				type: "Wands",
+				name: "ace of Wands Final",
+				description: "something here",
+				img: "ace-wands-complete.jpg"
+			},
+			{
+				type: "Wands",
+				name: "King of Wands Final",
+				description: "something here",
+				img: "King-of-Wands.jpg"
+			},
+			{
+				type: "Wands",
+				name: "Knight of Wands Final",
+				description: "something here",
+				img: "knight-of-wands.jpg"
+			},
+			{
+				type: "Wands",
+				name: "Page of Wands Final",
+				description: "something here",
+				img: "page-of-wands.jpg"
+			},
+			{
+				type: "Wands",
+				name: "Queen of Wands Final",
+				description: "something here",
+				img: "Queen-of-Wands.jpg"
+			},
+
+		]
+
+		const app_data = {
+			current_card_index: 0,
+		}
+
+
+		//SHUFFLE FUNCTION
+		var shuffle = function (array) {
+
+			var currentIndex = array.length;
+			var temporaryValue, randomIndex;
+
+			// While there remain elements to shuffle...
+			while (0 !== currentIndex) {
+				// Pick a remaining element...
+				randomIndex = Math.floor(Math.random() * currentIndex);
+				currentIndex -= 1;
+
+				// And swap it with the current element.
+				temporaryValue = array[currentIndex];
+				array[currentIndex] = array[randomIndex];
+				array[randomIndex] = temporaryValue;
+			}
+
+			return array;
+
+		};
+
+
+
+		// INIT FUNCTION
+		const init = function(){
+			let shuffled_cards = shuffle(cards)
+
+			// INITIAL CARD DECK SHUFFLE
+			app_data.card_deck = shuffled_cards.map(card => {
+				return `./Tarot_Cards/${card.type}/${card.img}`
+			})
+
+
+			let header_deck = app_data.card_deck.slice(10, 46)
+
+			header_deck.forEach(card => {
+				const card_html = `
+					<div class="header-card">
+							<img src=${card} alt="">
+						</div>`
+				$('.header-card-grid').append(card_html)
+
+			})
+
+
+			// LISTENERS
+			//----------
+
+			// USER SHUFFLE
+			$('.user-shuffle').on('click', function(){
+
+				$('.header-card-grid').empty();
+				
+				app_data.card_deck = shuffle(app_data.card_deck)
+
+				let header_shuffled_cards = shuffle(cards)
+
+				header_deck = header_shuffled_cards.map(card => {
+					return `./Tarot_Cards/${card.type}/${card.img}`
+				})
+			
+
+				header_deck.slice(0, 36).forEach(card => {
+					const card_html = `
+						<div class="header-card">
+								<img src=${card} alt="">
+							</div>`
+					$('.header-card-grid').append(card_html)
+
+				})
+
+			})
+
+
+			// CHOOSE CARD
+			$('.choose-card').on('click', function(){
+				console.log('choose card')
+				let chosen_card = app_data.card_deck.splice(0,1)
+
+				console.log(chosen_card[0], app_data.card_deck)
+				const card_html = `
+					<div class="chosen-card chosen-card-${app_data.current_card_index}">
+							<img src=${chosen_card[0]} alt="">
+						</div>`
+
+				$('.chosen-card-grid').append(card_html)
+				$('html, body').animate({
+	            scrollTop: $(`.chosen-card-${app_data.current_card_index}`).offset().top - 10
+	        }, 500);
+
+				app_data.current_card_index += 1;
+			})
+
+
+
+			// CLEAR CARDS
+			$('.clear-cards').on('click', function() {
+				console.log('clear cards')
+				$('.chosen-card-grid').empty()
+				shuffled_cards = shuffle(cards)
+
+				card_deck = shuffled_cards.map(card => {
+					return `./Tarot_Cards/${card.type}/${card.img}`
+				})
+
+			})
+		}
+
+		// DOCUMENT READY
+		$( document ).ready(function() {
+			init();
+		});
+
+
+	</script>
+	
+</body>
+</html>
